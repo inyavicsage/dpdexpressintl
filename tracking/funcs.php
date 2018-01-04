@@ -4,28 +4,28 @@ function db_conn() {
 	$db_host = 'localhost';
 	$db_user = 'root';
 	$db_pass = '';
-	$db_name = 'project';
+	$db_name = 'dpdexpressintl';
 
 	$db_conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die('Database connection failed.');
 
 	return $db_conn;
 }
 
-function get_records() {
-	$records = [];
+function get_tracking_infos() {
+	$tracking_infos = [];
 
 	$db_conn = db_conn();
 
-	$query = 'SELECT * FROM `comp_sales_sys`';
+	$query = 'SELECT * FROM `tracking_infos`';
 	if ($result = mysqli_query($db_conn, $query)) {
 	    if (mysqli_num_rows($result) != 0) {
 	        while ($row = mysqli_fetch_assoc($result)) {
-	            $records[$row['SN']] = $row;
+	            $tracking_infos[$row['SN']] = $row;
 	        }
 	    }
 	}
 
-	return $records;
+	return $tracking_infos;
 }
 
 function get_record($SN) {

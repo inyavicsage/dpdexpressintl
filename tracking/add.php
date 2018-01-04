@@ -5,9 +5,6 @@
 		<div class="well well-sm">
 			<h2 align="center">Add Tracking Info</h2>
 			<form class="form-horizontal" method="post" action="add_action.php">
-				<?php if (isset($_GET['msg'])): ?>
-					<div align="center" class="alert alert-info" role="alert"><?php echo $_GET['msg']; ?></div>
-				<?php endif; ?>
 				<div class="form-group">
 					<label for="shipper_name" class="col-sm-4 control-label">Shipper Name:</label>
 					<div class="col-sm-8">

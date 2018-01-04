@@ -3,7 +3,7 @@
 require 'funcs.php';
 
 if (!isset($_POST['submit'])) {
-	header('Location: add.php?msg=Err1: An error occured. Please try again later.');
+	header('Location: index.php?msg=Err1: An error occured. Please try again later.');
 	exit();
 }
 
@@ -27,18 +27,25 @@ $comment = $_POST['comment'];
 $comment2 = $_POST['comment2'];
 $comment3 = $_POST['comment3'];
 
+$tracking_no = substr(strtoupper(uniqid(NULL)), 4, 9);
 
 $db_conn = db_conn();
 
-$query = 'INSERT INTO `comp_sales_sys`
-(`cust_name`, `cust_addr`, `cust_phone_num`, `item_bought`, `item_sold`, `unit_price`, `total_amt`, `total_expen`, `date`, `qty`)
-VALUES ("' . $cust_name . '", "' . $cust_addr . '", "' . $cust_phone_num . '", "' . $item_bought . '", "' . $item_sold . '",
-"' . $unit_price . '", "' . $total_amt . '", "' . $total_expen . '", "' . $date . '", "' . $qty . '")';
+$query = 'INSERT INTO `tracking_infos` (
+	`tracking_no`, `shipper_name`, `shipper_phone`, `shipper_addr`, `receiver_name`, `receiver_phone`,`consign_no`, `ship_type`,
+	`weight`, `invoice_no`, `booking_mode`, `total_freight`, `mode`, `pickup_date_time`, `est_time_of_arrival`, `status`,
+	`current_loc`, `comment`, `comment2`, `comment3`
+) VALUES (
+	"' . $tracking_no . '", "' . $shipper_name . '", "' . $shipper_phone . '", "' . $shipper_addr . '", "' . $receiver_name . '",
+	"' . $receiver_phone . '", "' . $consign_no . '", "' . $ship_type . '", "' . $weight . '", "' . $invoice_no . '",
+	"' . $booking_mode . '", "' . $total_freight . '", "' . $mode . '", "' . $pickup_date_time . '", "' . $est_time_of_arrival . '",
+	"' . $status . '", "' . $current_loc . '", "' . $comment . '", "' . $comment2 . '", "' . $comment3 . '"
+)';
 
 if (!(mysqli_query($db_conn, $query))) {
-    header('Location: index.php?msg=Err2: The record could not be added to the database. Please try again later.');
+    header('Location: index.php?msg=Err2: The tracking info could not be added to the database. Please try again later.');
 } else {
-	header('Location: index.php?msg=The record has been added to the database.');
+	header('Location: index.php?msg=The tracking info has been added to the database.');
 }
 
 exit();
