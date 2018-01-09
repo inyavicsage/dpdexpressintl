@@ -1,4 +1,10 @@
             <div class="row">
+            	<p align="center">
+            		<a href="../index.html">Back to homepage</a>
+					<?php if (isset($_SESSION['username'])): ?>
+            			- <a href="logout.php">Logout (<?php echo $_SESSION['username']; ?>)</a>
+					<?php endif; ?>
+            	</p>
                 <p align="center">© 2017 - All Rights Reserved. Designed by Inyavic Sage.</p>
             </div>
         </div>

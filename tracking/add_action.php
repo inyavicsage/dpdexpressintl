@@ -1,6 +1,8 @@
 <?php
 
+session_start();
 require 'funcs.php';
+require_login();
 
 if (!isset($_POST['submit'])) {
 	header('Location: index.php?msg=Err1: An error occured. Please try again later.');

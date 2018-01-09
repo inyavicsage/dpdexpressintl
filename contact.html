@@ -65,9 +65,9 @@ function MM_validateForm() { //v4.0
         <td height="31" colspan="3" bgcolor="#FFFFFF" align="center"><table id="linkbox" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
           <tr>
             <td align="center" width="794" height="51"><a href="index-2.html">Home</a> <a href="about.html">About Us</a> <a href="intdel.html">International Delivery</a> <a href="spedel.html">Special Delivery</a> <a href="unwanted.html">Unwanted Items</a> <a href="tracking.html">Tracking</a> <a href="contact.html">Contact Us</a> <a href="terms.html">Our Terms</a></td> 
-            <td align="center" width="209"><form id="form1" name="form1" method="post" action="#">
+            <td align="center" width="209"><form id="form1" name="form1" method="get" action="tracking/get.php">
               <label for="textfield"></label>
-              <input type="text" name="textfield" id="textfield" />
+              <input type="text" name="tracking-no" id="textfield" />
               <input type="submit" name="button" id="button" value="Search" />
             </form></td>
             </tr>

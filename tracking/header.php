@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Add Tracking Info</title>
+        <title>DPD Express -> Tracking</title>
         <base href="">
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -17,5 +17,7 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <h1 align="center"><a href="index.php">DPD Express</a></h1>
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <a href="index.php"><img src="../images/logo.png" alt="logo"></a>
+                </div>
             </div>

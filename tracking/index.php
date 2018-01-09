@@ -1,15 +1,17 @@
 <?php
-	include 'header.php';
+	session_start();
 	require 'funcs.php';
+	require_login();
+	include 'header.php';
 ?>
 <div class="row">
 	<div class="col-md-12">
-		<h2 align="center">Tracking Info</h2>
+		<h2 align="center">Tracking Infos</h2>
 		<table class="table table-bordered">
 			<?php if (isset($_GET['msg'])): ?>
 				<div align="center" class="alert alert-info" role="alert"><?php echo $_GET['msg']; ?></div>
 			<?php endif; ?>
-			<div class="clearfix"><a class="btn btn-primary pull-right" href="add.php">ADD</a></div>
+			<div class="clearfix"><p class="pull-right"><a class="btn btn-primary" href="add.php">ADD</a></p></div>
 			<thead>
 				<th>SN</th>
 				<th>Tracking No</th>
@@ -34,20 +36,20 @@
 				<th>Comment 3</th>
 			</thead>
 			<tbody>
-				<?php foreach (get_tracking_infos() as $SN => $tracking_infos): ?>
+				<?php foreach (get_tracking_infos() as $tracking_no => $tracking_infos): ?>
 				 	<tr>
 				 		<?php foreach ($tracking_infos as $field): ?>
 				 			<td><?php echo $field; ?></td>
 				 		<?php endforeach ?>
 				 		<td>
-				 			<a href="update.php?SN=<?php echo $SN; ?>">UPDATE</a>
-				 			<a href="remove.php?SN=<?php echo $SN; ?>">REMOVE</a>
+				 			<a href="update.php?tracking-no=<?php echo $tracking_no; ?>">UPDATE</a>
+				 			<a href="remove.php?tracking-no=<?php echo $tracking_no; ?>">REMOVE</a>
 				 		</td>
 				 	</tr>
 				<?php endforeach; ?>
 			</tbody>
 		</table>
-		<button class="btn btn-primary pull-right" onclick="myFunction()">PRINT</button>
+		<button class="btn btn-primary" onclick="myFunction()">PRINT</button>
 	</div>
 </div>
 <script>

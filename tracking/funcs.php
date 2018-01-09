@@ -11,6 +11,13 @@ function db_conn() {
 	return $db_conn;
 }
 
+function require_login() {
+	if (!isset($_SESSION['username'])) {
+		header('Location: login.php?msg=Login required.');
+		exit();
+	}
+}
+
 function get_tracking_infos() {
 	$tracking_infos = [];
 
@@ -20,7 +27,7 @@ function get_tracking_infos() {
 	if ($result = mysqli_query($db_conn, $query)) {
 	    if (mysqli_num_rows($result) != 0) {
 	        while ($row = mysqli_fetch_assoc($result)) {
-	            $tracking_infos[$row['SN']] = $row;
+	            $tracking_infos[$row['tracking_no']] = $row;
 	        }
 	    }
 	}
@@ -28,19 +35,19 @@ function get_tracking_infos() {
 	return $tracking_infos;
 }
 
-function get_record($SN) {
-	$record = [];
+function get_tracking_info($tracking_no) {
+	$tracking_info = [];
 
 	$db_conn = db_conn();
 
-	$query = 'SELECT * FROM `comp_sales_sys` WHERE `SN` = "' . $SN . '" LIMIT 1';
+	$query = 'SELECT * FROM `tracking_infos` WHERE `tracking_no` = "' . $tracking_no . '" LIMIT 1';
     if ($result = mysqli_query($db_conn, $query)) {
         if (mysqli_num_rows($result) != 0) {
             if ($row = mysqli_fetch_assoc($result)) {
-                $record = $row;
+                $tracking_info = $row;
             }
         }
     }
 
-	return $record;
+	return $tracking_info;
 }

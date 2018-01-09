@@ -1,13 +1,15 @@
 <?php
+	session_start();
 	require 'funcs.php';
+	require_login();
 	include 'header.php';
 
-	if (!isset($_GET['SN'])) {
+	if (!isset($_GET['tracking-no'])) {
 		header('Location: index.php?msg=Err1: An error occured. Please try again later.');
 		exit();
 	}
 
-	$record = get_record($_GET['SN']);
+	$tracking_info = get_tracking_info($_GET['tracking-no']);
 ?>
 <div class="row">
 	<div class="col-md-3"></div>
@@ -15,65 +17,119 @@
 		<div class="well well-sm">
 			<h2 align="center">UPDATE RECORD</h2>
 			<form class="form-horizontal" method="post" action="update_action.php">
-				<input type="hidden" name="SN" value="<?php echo $_GET['SN']; ?>">
+				<input type="hidden" name="tracking_no" value="<?php echo $_GET['tracking-no']; ?>">
 				<div class="form-group">
-					<label for="cust_name" class="col-sm-4 control-label">CUSTOMER'S NAME (CN):</label>
+					<label for="shipper_name" class="col-sm-4 control-label">Shipper Name:</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="cust_name" value="<?php echo $record['cust_name']; ?>" placeholder="Enter the customer's name here...">
+						<input type="text" class="form-control" name="shipper_name" value="<?php echo $tracking_info['shipper_name']; ?>" placeholder="Enter shipper name here...">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="cust_addr" class="col-sm-4 control-label">CUSTOMER'S ADDRESS (CA):</label>
+					<label for="shipper_phone" class="col-sm-4 control-label">Shipper Phone:</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="cust_addr" value="<?php echo $record['cust_addr']; ?>" placeholder="Enter the customer's address here...">
+						<input type="text" class="form-control" name="shipper_phone" value="<?php echo $tracking_info['shipper_phone']; ?>" placeholder="Enter shipper phone here...">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="cust_phone_num" class="col-sm-4 control-label">CUSTOMER'S PHONE NUMBER (CPN):</label>
+					<label for="shipper_addr" class="col-sm-4 control-label">Shipper Address:</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="cust_phone_num" value="<?php echo $record['cust_phone_num']; ?>" placeholder="Enter the customer's phone number here...">
+						<input type="text" class="form-control" name="shipper_addr" value="<?php echo $tracking_info['shipper_addr']; ?>" placeholder="Enter shipper address here...">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="item_bought" class="col-sm-4 control-label">ITEM BOUGHT (IB):</label>
+					<label for="receiver_name" class="col-sm-4 control-label">Receiver Name:</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="item_bought" value="<?php echo $record['item_bought']; ?>" placeholder="Enter the item bought here...">
+						<input type="text" class="form-control" name="receiver_name" value="<?php echo $tracking_info['receiver_name']; ?>" placeholder="Enter receiver name here...">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="item_sold" class="col-sm-4 control-label">ITEM SOLD (IS):</label>
+					<label for="receiver_phone" class="col-sm-4 control-label">Receiver Phone:</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="item_sold" value="<?php echo $record['item_sold']; ?>" placeholder="Enter the item sold here...">
+						<input type="text" class="form-control" name="receiver_phone" value="<?php echo $tracking_info['receiver_phone']; ?>" placeholder="Enter receiver phone here...">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="unit_price" class="col-sm-4 control-label">UNIT PRICE (UP):</label>
+					<label for="consign_no" class="col-sm-4 control-label">Consignment No:</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="unit_price" value="<?php echo $record['unit_price']; ?>" placeholder="Enter the unit price here...">
+						<input type="text" class="form-control" name="consign_no" value="<?php echo $tracking_info['consign_no']; ?>" placeholder="Enter consignment no here...">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="total_amt" class="col-sm-4 control-label">TOTAL AMOUNT (TA):</label>
+					<label for="ship_type" class="col-sm-4 control-label">Ship Type:</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="total_amt" value="<?php echo $record['total_amt']; ?>" placeholder="Enter the total amount here...">
+						<input type="text" class="form-control" name="ship_type" value="<?php echo $tracking_info['ship_type']; ?>" placeholder="Enter ship type here...">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="total_expen" class="col-sm-4 control-label">TOTAL EXPENDITURE (TE):</label>
+					<label for="weight" class="col-sm-4 control-label">Weight:</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="total_expen" value="<?php echo $record['total_expen']; ?>" placeholder="Enter the total expenditure here...">
+						<input type="text" class="form-control" name="weight" value="<?php echo $tracking_info['weight']; ?>" placeholder="Enter weight here...">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="date" class="col-sm-4 control-label">DATE (D):</label>
+					<label for="invoice_no" class="col-sm-4 control-label">Invoice No:</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="date" value="<?php echo $record['date']; ?>" placeholder="Enter the date here...">
+						<input type="text" class="form-control" name="invoice_no" value="<?php echo $tracking_info['invoice_no']; ?>" placeholder="Enter invoice no here...">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="qty" class="col-sm-4 control-label">QUANTITY (Q):</label>
+					<label for="booking_mode" class="col-sm-4 control-label">Booking Mode:</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="qty" value="<?php echo $record['qty']; ?>" placeholder="Enter the quantity here...">
+						<input type="text" class="form-control" name="booking_mode" value="<?php echo $tracking_info['booking_mode']; ?>" placeholder="Enter booking mode here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="total_freight" class="col-sm-4 control-label">Total Freight:</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="total_freight" value="<?php echo $tracking_info['total_freight']; ?>" placeholder="Enter total freight here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="mode" class="col-sm-4 control-label">Mode:</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="mode" value="<?php echo $tracking_info['mode']; ?>" placeholder="Enter mode here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="pickup_date_time" class="col-sm-4 control-label">Pickup Date/Time:</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="pickup_date_time" value="<?php echo $tracking_info['pickup_date_time']; ?>" placeholder="Enter the pickup date/time here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="est_time_of_arrival" class="col-sm-4 control-label">Estimated Time of Arrival:</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="est_time_of_arrival" value="<?php echo $tracking_info['est_time_of_arrival']; ?>" placeholder="Enter the estimated time of arrival here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="status" class="col-sm-4 control-label">Status:</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="status" value="<?php echo $tracking_info['status']; ?>" placeholder="Enter status here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="current_loc" class="col-sm-4 control-label">Current Location:</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="current_loc" value="<?php echo $tracking_info['current_loc']; ?>" placeholder="Enter current location here...">
+					</div>
+				</div>	
+				<div class="form-group">
+					<label for="comment" class="col-sm-4 control-label">Comment:</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="comment" value="<?php echo $tracking_info['comment']; ?>" placeholder="Enter comment here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="comment2" class="col-sm-4 control-label">Comment 2:</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="comment2" value="<?php echo $tracking_info['comment2']; ?>" placeholder="Enter comment here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="comment3" class="col-sm-4 control-label">Comment 3:</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="comment3" value="<?php echo $tracking_info['comment3']; ?>" placeholder="Enter comment here...">
 					</div>
 				</div>
 				<div class="form-group">

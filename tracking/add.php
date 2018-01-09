@@ -1,4 +1,9 @@
-<?php include 'header.php'; ?>
+<?php
+	session_start();
+	require 'funcs.php';
+	require_login();
+	include 'header.php';
+?>
 <div class="row">
 	<div class="col-md-3"></div>
 	<div class="col-md-6">
