@@ -4,7 +4,9 @@ session_start();
 require 'funcs.php';
 require_login();
 
-if (!isset($_POST['submit'])) {
+if (!areset(['shipper_name', 'shipper_phone', 'shipper_addr', 'receiver_name', 'receiver_phone', 'consign_no', 'ship_type', 'weight',
+	'invoice_no', 'booking_mode', 'total_freight', 'mode', 'pickup_date_time', 'est_time_of_arrival', 'status', 'current_loc',
+	'comment', 'comment2', 'comment3'])) {
 	header('Location: index.php?msg=Err1: An error occured. Please try again later.');
 	exit();
 }
@@ -31,8 +33,6 @@ $comment3 = $_POST['comment3'];
 
 $tracking_no = substr(strtoupper(uniqid(NULL)), 4, 9);
 
-$db_conn = db_conn();
-
 $query = 'INSERT INTO `tracking_infos` (
 	`tracking_no`, `shipper_name`, `shipper_phone`, `shipper_addr`, `receiver_name`, `receiver_phone`,`consign_no`, `ship_type`,
 	`weight`, `invoice_no`, `booking_mode`, `total_freight`, `mode`, `pickup_date_time`, `est_time_of_arrival`, `status`,
@@ -44,7 +44,7 @@ $query = 'INSERT INTO `tracking_infos` (
 	"' . $status . '", "' . $current_loc . '", "' . $comment . '", "' . $comment2 . '", "' . $comment3 . '"
 )';
 
-if (!(mysqli_query($db_conn, $query))) {
+if (!(mysqli_query(db_conn(), $query))) {
     header('Location: index.php?msg=Err2: The tracking info could not be added to the database. Please try again later.');
 } else {
 	header('Location: index.php?msg=The tracking info has been added to the database.');

@@ -36,14 +36,14 @@
 				<th>Comment 3</th>
 			</thead>
 			<tbody>
-				<?php foreach (get_tracking_infos() as $tracking_no => $tracking_infos): ?>
+				<?php foreach (get_tracking_infos() as $tracking_info): ?>
 				 	<tr>
-				 		<?php foreach ($tracking_infos as $field): ?>
+				 		<?php foreach ($tracking_info as $field): ?>
 				 			<td><?php echo $field; ?></td>
 				 		<?php endforeach ?>
 				 		<td>
-				 			<a href="update.php?tracking-no=<?php echo $tracking_no; ?>">UPDATE</a>
-				 			<a href="remove.php?tracking-no=<?php echo $tracking_no; ?>">REMOVE</a>
+				 			<a href="update.php?tracking-no=<?php echo $tracking_info['tracking_no']; ?>">UPDATE</a>
+				 			<a href="remove.php?tracking-no=<?php echo $tracking_info['tracking_no']; ?>">REMOVE</a>
 				 		</td>
 				 	</tr>
 				<?php endforeach; ?>
